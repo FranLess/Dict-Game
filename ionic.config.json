@@ -1,0 +1,7 @@
+{
+  "name": "dict game",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
