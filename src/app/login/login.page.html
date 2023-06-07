@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>user-login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label for="email">Email</ion-label>
+          <ion-input id="email" type="email" [(ngModel)]="email" />
+        </ion-item>
+        <ion-item>
+          <ion-label for="password">Contraseña</ion-label>
+          <ion-input id="password" type="text" [(ngModel)]="password" />
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="login()">Log in</ion-button>
+    </ion-card>
+  </div>
+  <ion-button (click)="getUser()"></ion-button>
+  <ion-button (click)="confirmPassword()"></ion-button>
+</ion-content>

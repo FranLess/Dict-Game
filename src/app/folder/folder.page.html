@@ -16,6 +16,7 @@
 
   <ion-img src="assets/logo.png"></ion-img>
   <div class="container">
+
     <ion-list>
       <ion-item>
         <ion-label>Liam Josue Marquéz Melendez</ion-label>
@@ -24,8 +25,13 @@
         <ion-label>Francisco Miguel Martínez González</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Emialino Reynoza González</ion-label>
+        <ion-label>
+          <h1>{{token}}</h1>
+        </ion-label>
       </ion-item>
     </ion-list>
   </div>
+  <ion-item>
+    <ion-button (click)="register()"> Register User </ion-button>
+  </ion-item>
 </ion-content>
