@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { ApiHelperService } from '../services/helpers/api-helper.service';
 
 @Component({
   selector: 'app-register',
@@ -14,10 +15,12 @@ export class RegisterPage implements OnInit {
   public password_confirmation: string = '';
   private uri: string;
 
-  constructor(private http: HttpClient, private platform: Platform) {
-    this.platform.is('mobile')
-      ? (this.uri = 'http://dictgame.000webhostapp.com')
-      : (this.uri = 'http://127.0.0.1:8000');
+  constructor(
+    private http: HttpClient,
+    private platform: Platform,
+    private apiHelper: ApiHelperService
+  ) {
+    this.uri = this.apiHelper.uri;
   }
 
   ngOnInit() {}
@@ -36,20 +39,6 @@ export class RegisterPage implements OnInit {
       (error) => {
         // Manejar el error
       }
-    );
-  }
-
-  profiles() {
-    this.http.get(`${this.uri}/api/profiles`).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-    );
-  }
-
-  home() {
-    this.http.get(`${this.uri}`).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
     );
   }
 }
