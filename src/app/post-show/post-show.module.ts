@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateImagePageRoutingModule } from './create-image-routing.module';
+import { PostShowPageRoutingModule } from './post-show-routing.module';
 
-import { CreateImagePage } from './create-image.page';
+import { PostShowPage } from './post-show.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CreateImagePageRoutingModule
+    PostShowPageRoutingModule
   ],
-  declarations: [CreateImagePage]
+  declarations: [PostShowPage]
 })
-export class CreateImagePageModule {}
+export class PostShowPageModule {}

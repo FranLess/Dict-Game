@@ -67,8 +67,8 @@ const routes: Routes = [
       import('./team-page/team-page.module').then((m) => m.TeamPagePageModule),
   },
   {
-    path: 'create-image',
-    loadChildren: () => import('./create-image/create-image.module').then( m => m.CreateImagePageModule)
+    path: 'post-show',
+    loadChildren: () => import('./post-show/post-show.module').then( m => m.PostShowPageModule)
   },
 ];
 

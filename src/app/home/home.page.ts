@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
     private postsService: PostApiService
   ) {
     this.uri = this.apiHelper.uri;
-    this.getPosts();
+
     // console.log(this.user);
   }
 
@@ -53,5 +53,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getPosts();
+  }
 }

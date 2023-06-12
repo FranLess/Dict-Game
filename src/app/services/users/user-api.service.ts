@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiHelperService } from '../helpers/api-helper.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { RouterService } from '../router/router.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class UserApiService {
   constructor(
     private apiHelper: ApiHelperService,
     private http: HttpClient,
-    private router: Router
+    private routerService: RouterService
   ) {
     this.uri = this.apiHelper.uri;
   }
@@ -29,12 +30,18 @@ export class UserApiService {
     formData.append('password', password);
     formData.append('device_name', deviceName);
 
-    await this.http.post(uri, formData).subscribe(
-      (data) => {
-        this.apiHelper.setToken(data);
-      },
-      (error) => console.log(error)
-    );
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(uri, formData).subscribe(
+        (data) => {
+          this.apiHelper.setToken(data);
+          // this.routerService.goHome();
+          resolve(data);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 
   // OBTENER EL USUARIO DE LA BASE DE DATOS
@@ -62,7 +69,7 @@ export class UserApiService {
     } catch (error) {
       console.log(error);
       console.log('Error al obtener el usuario', 'redireccionando a login...');
-      this.router.navigate(['/login']);
+      this.routerService.goLogin();
     }
   }
 }

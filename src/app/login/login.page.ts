@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiHelperService } from '../services/helpers/api-helper.service';
 import { RouterService } from '../services/router/router.service';
 import { UserApiService } from '../services/users/user-api.service';
+import { AlertController } from '@ionic/angular';
 // import { Storage } from '@capacitor/storage';
 @Component({
   selector: 'app-login',
@@ -17,13 +18,41 @@ export class LoginPage implements OnInit {
 
   constructor(
     private userService: UserApiService,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit() {}
 
   async login() {
-    await this.userService.login(this.email, this.password);
-    this.routerService.goHome();
+    this.userService
+      .login(this.email, this.password)
+      .then((res) => console.log(res))
+      .catch((error: any) => this.presentAlert(error.error));
   }
+
+  async presentAlert(messages: any) {
+    let message = '';
+    if (messages.errors) {
+      // Iterar sobre los errores y mostrar los mensajes
+      for (const field in messages.errors) {
+        if (messages.errors.hasOwnProperty(field)) {
+          let errorMessages: any = messages.errors[field];
+          message += `Error en ${field}: ${errorMessages}\n\n    `;
+        }
+      }
+    } else {
+      console.error('Error desconocido:', messages.message);
+    }
+    const alert = await this.alertController.create({
+      header: 'Error',
+      subHeader: 'Can not login',
+      message: `${message}`,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  // show an alert to say the login failed
 }
