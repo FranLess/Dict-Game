@@ -28,13 +28,13 @@
       Editar
     </ion-button>
     <ion-button (click)="addFriend(user.id)" expand="block" fill="solid">
-      Add Friend
+      Añadir amigo
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
   </div>
 
   <!-- Publicaciones del usuario -->
-  <ion-card *ngFor="let post of posts">
+  <ion-card *ngFor="let post of posts" (click)="showPost(post.id)">
     <ion-card-header>
       <!-- <ion-card-subtitle>{{  }}</ion-card-subtitle> -->
       <ion-card-title>{{ post.title }}</ion-card-title>
