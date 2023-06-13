@@ -35,6 +35,7 @@ export class UserApiService {
         (data) => {
           this.apiHelper.setToken(data);
           // this.routerService.goHome();
+          this.createProfile();
           resolve(data);
         },
         (error) => {
@@ -42,6 +43,24 @@ export class UserApiService {
         }
       );
     });
+  }
+
+  // CREAR PROFILE DE USUARIO
+  async createProfile() {
+    // url a llamar
+    const uri = `${this.uri}/api/profiles`;
+    const token = await this.apiHelper.getToken();
+    const user = await this.getUser();
+
+    const formData = new FormData();
+    formData.append('user_id', user.id);
+    formData.append('level_id', '1');
+    formData.append('_token', token);
+
+    this.http.post(uri, formData).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
   }
 
   // OBTENER EL USUARIO DE LA BASE DE DATOS
@@ -71,5 +90,40 @@ export class UserApiService {
       console.log('Error al obtener el usuario', 'redireccionando a login...');
       this.routerService.goLogin();
     }
+  }
+
+  // OBTENER EL PERFIL DEL USUARIO
+  async getProfile() {
+    const user: any = await this.getUser();
+    return user.profile;
+  }
+
+  // GUARDAR DATOS DEL PERFIL
+  async saveProfile(profile: any) {
+    const formData = new FormData();
+    for (let key in profile) {
+      formData.append(key, profile[key]);
+    }
+
+    // formData.append('level_id', '1');
+
+    // URL del endpoint que deseas llamar
+    const url = `${this.uri}/api/profiles/update/${profile.user_id}`;
+
+    // Token de autenticación
+    const token = await this.apiHelper.getToken();
+
+    // parameters
+    formData.append('_token', token);
+
+    const parameters = new HttpParams().set('_token', token);
+
+    // Realiza la solicitud GET con los parametros
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, formData, { params: parameters }).subscribe(
+        (response: any) => resolve(response),
+        (error) => reject(error)
+      );
+    });
   }
 }

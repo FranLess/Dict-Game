@@ -1,20 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!userLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
 <ion-content *ngIf="userLoaded">
   <div class="cover-photo">
     <!-- Foto de portada -->
-    <img [src]="profile.image_header" alt="Cover Photo" />
+    <img [src]="imageHeader" alt="Cover Photo" />
   </div>
 
   <div class="profile-info">
     <!-- Foto de perfil -->
-    <img [src]="profile.image" alt="Profile Photo" />
+    <img [src]="image" alt="Profile Photo" />
 
     <!-- Nombre y descripción del usuario -->
 
-    <h1>{{ user.username }}</h1>
+    <h1>{{ user.name }}</h1>
     <p>{{ profile.bio }}</p>
 
     <!-- Información adicional -->
-    <div class="additional-info">
+    <div class="additional-info" *ngIf="profile.country">
       <ion-icon name="location-outline"></ion-icon>
       <p>{{ profile.country.name }}</p>
     </div>
@@ -23,7 +35,13 @@
       <ion-icon name="calendar-outline"></ion-icon>
       <p>{{ profile.day_of_birth }}</p>
     </div>
-    <ion-button (click)="editar()" expand="block" fill="clear" shape="round">
+    <ion-button
+      [routerLink]="['/profile-edit']"
+      routerLinkActive="router-link-active"
+      expand="block"
+      fill="clear"
+      shape="round"
+    >
       <ion-icon slot="end" name="create-outline"></ion-icon>
       Editar
     </ion-button>

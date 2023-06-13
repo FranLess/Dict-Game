@@ -70,6 +70,10 @@ const routes: Routes = [
     path: 'post-show',
     loadChildren: () => import('./post-show/post-show.module').then( m => m.PostShowPageModule)
   },
+  {
+    path: 'profile-edit',
+    loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
+  },
 ];
 
 @NgModule({

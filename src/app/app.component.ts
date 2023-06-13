@@ -6,8 +6,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'user-login', url: '/user-login', icon: 'person' },
-    { title: 'post-create', url: '/post-create', icon: 'pen' },
+    { title: 'home', url: '/home', icon: 'home' },
+    { title: 'login', url: '/login', icon: 'person' },
+    { title: 'Create Post', url: '/post-create', icon: 'pencil' },
+    { title: 'Conversations', url: '/conversation', icon: 'chatbubbles' },
+    { title: 'Profile', url: '/profile', icon: 'person' },
+    { title: 'Logout', url: '/logout', icon: 'log-out' },
   ];
   constructor() {}
 }

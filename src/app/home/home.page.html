@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,12 +12,14 @@
     <ion-item *ngFor="let item of posts">
       <ion-card>
         <ion-card-header>
-          <ion-card-subtitle>{{item.user.username}}</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="item.user"
+            >{{item.user.username}}</ion-card-subtitle
+          >
           <ion-card-title>{{item.title}}</ion-card-title>
         </ion-card-header>
         <ion-img
-          *ngIf="item.images[0]"
-          src="{{item.images[0].source}}"
+          *ngIf="item.image"
+          src="{{item.image[0].source}}"
           alt="The Wisconsin State Capitol building in Madison, WI at night"
         ></ion-img>
         <ion-card-content> {{item.content}} </ion-card-content>

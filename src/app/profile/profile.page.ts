@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserApiService } from '../services/users/user-api.service';
 import { PostApiService } from '../services/posts/post-api.service';
+import { ApiHelperService } from '../services/helpers/api-helper.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,15 +9,22 @@ import { PostApiService } from '../services/posts/post-api.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  public uri: string;
   public userLoaded: boolean = false;
   public user: any;
   public posts: any;
   public profile: any;
 
+  public image: any;
+  public imageHeader: any;
+
   constructor(
+    private apiHelper: ApiHelperService,
     private userService: UserApiService,
     private postService: PostApiService
-  ) {}
+  ) {
+    this.uri = this.apiHelper.uri;
+  }
 
   ngOnInit() {
     this.getUser();
@@ -37,6 +45,8 @@ export class ProfilePage implements OnInit {
     this.posts = user.posts;
 
     this.userLoaded = true;
+    this.image = `${this.uri}/storage/${user.email}/profile/${this.profile.image}`;
+    this.imageHeader = `${this.uri}/storage/${user.email}/profile/${this.profile.image_header}`;
     console.log(this.user);
   }
 }

@@ -45,4 +45,63 @@ export class ApiHelperService {
   async getToken() {
     return (await this.storage.get(STORAGE_KEY_TOKEN)) || null;
   }
+
+  // GET GENDER LIST
+  async getGenderList() {
+    const token = await this.getToken();
+    const params = new HttpParams().set('token', token);
+
+    const url = `${this.uri}/api/genders`;
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url, { params }).subscribe(
+        (res: any) => resolve(res.data),
+        (error) => reject(error)
+      );
+    });
+  }
+
+  // GET COUNTRY LIST
+  async getCountryList() {
+    const token = await this.getToken();
+    const params = new HttpParams().set('_token', token);
+
+    const url = `${this.uri}/api/countries`;
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url, { params: params }).subscribe(
+        (res: any) => resolve(res.data),
+        (error) => reject(error)
+      );
+    });
+  }
+  // GET LEVELS LIST
+  async getLevelList() {
+    const token = await this.getToken();
+    const params = new HttpParams().set('_token', token);
+
+    const url = `${this.uri}/api/levels`;
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url, { params: params }).subscribe(
+        (res: any) => resolve(res.data),
+        (error) => reject(error)
+      );
+    });
+  }
+
+  // GET SENTIMENTALS LIST
+  async getSentimentalList() {
+    const token = await this.getToken();
+    const params = new HttpParams().set('_token', token);
+
+    const url = `${this.uri}/api/sentimentals`;
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.get(url, { params: params }).subscribe(
+        (res: any) => resolve(res.data),
+        (error) => reject(error)
+      );
+    });
+  }
 }
