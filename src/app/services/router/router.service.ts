@@ -19,6 +19,10 @@ export class RouterService {
     this.router.navigate(['/profile']);
   }
 
+  goProfileEdit() {
+    this.router.navigate(['/profile-edit']);
+  }
+
   goRegister() {
     this.router.navigate(['/register']);
   }

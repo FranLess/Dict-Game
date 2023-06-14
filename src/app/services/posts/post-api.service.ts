@@ -13,29 +13,77 @@ export class PostApiService {
     private apiHelper: ApiHelperService,
     private http: HttpClient,
     private router: Router,
-    private userService: UserApiService
+    private userService: UserApiService,
+    private userServie: UserApiService
   ) {
     this.uri = this.apiHelper.uri;
   }
 
   showPost(id: any) {
-    this.router.navigate(['/post', id]);
+    this.router.navigate(['/post-show', id]);
+  }
+
+  // LIKE POST
+  async likePost(id: number) {
+    const token = await this.apiHelper.getToken();
+    const url = `${this.uri}/api/hearts`;
+    const user = await this.userService.getCurrentUser();
+    const isTeam = false;
+    const receptor = isTeam ? 1 : 2;
+
+    const formData = new FormData();
+    formData.append('user_id', user.id);
+    formData.append('post_id', id.toString());
+
+    formData.append('_token', token);
+
+    // Realiza la solicitud POST con los parametros
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, formData).subscribe(
+        (response) => resolve(response),
+        (error) => reject(error)
+      );
+    });
+  }
+
+  // DISLIKE POST
+  async dislikePost(id: number) {
+    const token = await this.apiHelper.getToken();
+    const url = `${this.uri}/api/hearts/delete/${id}`;
+    const user = await this.userService.getCurrentUser();
+    const isTeam = false;
+    const formData = new FormData();
+    const receptor = isTeam ? 1 : 2;
+
+    formData.append('_token', token);
+
+    // Realiza la solicitud POST con los parametros
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(url, formData).subscribe(
+        (response) => resolve(response),
+        (error) => reject(error)
+      );
+    });
   }
 
   // CREAR POST
   async createPost(title: string, content: string, image: File) {
     try {
+      const token = await this.apiHelper.getToken();
       const url = `${this.uri}/api/posts`;
       const isTeam = false;
-      const user = await this.userService.getUser();
+      const user = await this.userService.getCurrentUser();
       const formData = new FormData();
       const receptor = isTeam ? 1 : 2;
       formData.append('title', title);
       formData.append('content', content);
+      formData.append('image', image);
       formData.append('user_id', user.id);
       formData.append('level_id', user.profile.level_id);
       formData.append('receptor_type_id', receptor.toString());
       formData.append('team_id', receptor.toString());
+
+      formData.append('_token', token);
 
       // Realiza la solicitud POST con los parametros
       return new Promise<any>((resolve, reject) => {
@@ -43,10 +91,6 @@ export class PostApiService {
           (response) => resolve(response),
           (error) => reject(error)
         );
-      }).catch((error) => {
-        console.log(error);
-        console.log('Error al crear post', 'redireccionando a login...');
-        this.router.navigate(['/login']);
       });
     } catch (error) {
       console.log(error);
@@ -63,13 +107,9 @@ export class PostApiService {
       // Realiza la solicitud GET con los parametros
       return new Promise<any>((resolve, reject) => {
         this.http.get(url, { params: params }).subscribe(
-          (response) => resolve(response),
+          (response: any) => resolve(response.data),
           (error) => reject(error)
         );
-      }).catch((error) => {
-        console.log(error);
-        console.log('Error al obtener post', 'redireccionando a login...');
-        this.router.navigate(['/login']);
       });
     } catch (error) {
       console.log(error);
@@ -108,6 +148,29 @@ export class PostApiService {
       console.log(error);
       console.log('Error al obtener posts', 'redireccionando a login...');
       this.router.navigate(['/login']);
+    }
+  }
+
+  //  COMMENT
+  async addComment(post_id: any, user_id: any, content: string) {
+    try {
+      const token = await this.apiHelper.getToken();
+      const url = `${this.uri}/api/comments`;
+      const formData = new FormData();
+      formData.append('post_id', post_id);
+      formData.append('user_id', user_id);
+      formData.append('content', content);
+      formData.append('_token', token);
+
+      // Realiza la solicitud POST con los parametros
+      return new Promise<any>((resolve, reject) => {
+        this.http.post(url, formData).subscribe(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 }

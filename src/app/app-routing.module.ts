@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -57,7 +57,7 @@ const routes: Routes = [
       import('./post/post.module').then((m) => m.PostPageModule),
   },
   {
-    path: 'user-page',
+    path: 'user-page/:id',
     loadChildren: () =>
       import('./user-page/user-page.module').then((m) => m.UserPagePageModule),
   },
@@ -67,12 +67,34 @@ const routes: Routes = [
       import('./team-page/team-page.module').then((m) => m.TeamPagePageModule),
   },
   {
-    path: 'post-show',
-    loadChildren: () => import('./post-show/post-show.module').then( m => m.PostShowPageModule)
+    path: 'post-show/:id',
+    loadChildren: () =>
+      import('./post-show/post-show.module').then((m) => m.PostShowPageModule),
   },
   {
     path: 'profile-edit',
-    loadChildren: () => import('./profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
+    loadChildren: () =>
+      import('./profile-edit/profile-edit.module').then(
+        (m) => m.ProfileEditPageModule
+      ),
+  },
+  {
+    path: 'logout',
+    loadChildren: () =>
+      import('./logout/logout.module').then((m) => m.LogoutPageModule),
+  },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersPageModule),
+  },
+  {
+    path: 'friends-list',
+    loadChildren: () => import('./friends-list/friends-list.module').then( m => m.FriendsListPageModule)
+  },
+  {
+    path: 'friends-requests',
+    loadChildren: () => import('./friends-requests/friends-requests.module').then( m => m.FriendsRequestsPageModule)
   },
 ];
 

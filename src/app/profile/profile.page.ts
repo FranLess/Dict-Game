@@ -9,6 +9,9 @@ import { ApiHelperService } from '../services/helpers/api-helper.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  public editMode: boolean = false;
+  public classModeEdit: string = 'edit-off';
+
   public uri: string;
   public userLoaded: boolean = false;
   public user: any;
@@ -27,26 +30,32 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser();
+    setTimeout(() => {
+      this.getCurrentUser();
+    }, 2 * 1000);
   }
 
   editar() {}
 
   addFriend(id: any) {}
 
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    this.classModeEdit = this.editMode ? 'edit-on' : 'edit-off';
+  }
+
   showPost(id: any) {
     this.postService.showPost(id);
   }
 
-  async getUser() {
-    const user: any = await this.userService.getUser();
+  async getCurrentUser() {
+    const user: any = await this.userService.getCurrentUser();
     this.user = user;
     this.profile = user.profile;
     this.posts = user.posts;
 
     this.userLoaded = true;
-    this.image = `${this.uri}/storage/${user.email}/profile/${this.profile.image}`;
-    this.imageHeader = `${this.uri}/storage/${user.email}/profile/${this.profile.image_header}`;
+
     console.log(this.user);
   }
 }

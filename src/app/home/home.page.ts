@@ -26,6 +26,10 @@ export class HomePage implements OnInit {
     // console.log(this.user);
   }
 
+  showPost(id: number) {
+    this.postsService.showPost(id);
+  }
+
   async getPosts() {
     // se obtienen los datos de los posts junto con los datos de paginacion
     const data: any = await this.postsService.getPosts(this.page);

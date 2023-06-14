@@ -17,7 +17,13 @@
           <ion-input id="password" type="text" [(ngModel)]="password" />
         </ion-item>
       </ion-list>
-      <ion-button (click)="login()">Log in</ion-button>
+      <ion-button (click)="login()" expand="full">Log in</ion-button>
+      <ion-button
+        [routerLink]="['/register']"
+        routerLinkActive="router-link-active"
+        expand="full"
+        >Registrarse</ion-button
+      >
     </ion-card>
   </div>
 </ion-content>

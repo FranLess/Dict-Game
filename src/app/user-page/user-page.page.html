@@ -7,10 +7,75 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">userPage</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="!userLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+<ion-content *ngIf="userLoaded">
+  <div class="cover-photo">
+    <!-- Foto de portada -->
+    <img [src]="profile.image_header_url" alt="Cover Photo" />
+  </div>
+
+  <div class="profile-info">
+    <!-- Foto de perfil -->
+    <img [src]="profile.image_url" alt="Profile Photo" />
+
+    <!-- Nombre y descripción del usuario -->
+
+    <h1>{{ user.name }}</h1>
+    <p>{{ profile.bio }}</p>
+
+    <!-- Información adicional -->
+    <div class="additional-info" *ngIf="profile.country">
+      <ion-icon name="location-outline"></ion-icon>
+      <p>{{ profile.country.name }}</p>
+    </div>
+
+    <div class="additional-info">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <p>{{ profile.day_of_birth }}</p>
+    </div>
+
+    <ion-button
+      (click)="addFriend(user.id)"
+      expand="block"
+      fill="solid"
+      *ngIf="!isFriend"
+    >
+      Añadir amigo
+      <ion-icon slot="end" name="add"></ion-icon>
+    </ion-button>
+    <ion-button
+      danger
+      (click)="deleteFriend()"
+      expand="block"
+      fill="solid"
+      *ngIf="isFriend"
+    >
+      Eliminar amigo
+      <ion-icon slot="end" name="close-circle"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Publicaciones del usuario -->
+  <div class="container" *ngIf="userIsPublic || isFriend">
+    <ion-card *ngFor="let post of posts" (click)="showPost(post.id)">
+      <ion-card-header>
+        <!-- <ion-card-subtitle>{{  }}</ion-card-subtitle> -->
+        <ion-card-title>{{ post.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-img
+        *ngIf="post.image"
+        [src]="post.image_source"
+        alt="noimage"
+      ></ion-img>
+    </ion-card>
+  </div>
+  <ion-text
+    color="primary"
+    *ngIf="!userIsPublic && !isFriend"
+    class="ion-text-center"
+  >
+    <h1>Está cuenta es privada</h1>
+  </ion-text>
 </ion-content>

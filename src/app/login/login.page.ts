@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiHelperService } from '../services/helpers/api-helper.service';
 import { RouterService } from '../services/router/router.service';
 import { UserApiService } from '../services/users/user-api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 // import { Storage } from '@capacitor/storage';
 @Component({
   selector: 'app-login',
@@ -19,15 +19,22 @@ export class LoginPage implements OnInit {
   constructor(
     private userService: UserApiService,
     private routerService: RouterService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private menuController: MenuController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.menuController.enable(false);
+  }
 
   async login() {
     this.userService
       .login(this.email, this.password)
-      .then((res) => console.log(res))
+      .then((res) => {
+        this.userService.createProfile();
+        this.menuController.enable(true);
+      })
+      .then((res) => this.routerService.goProfile())
       .catch((error: any) => this.presentAlert(error.error));
   }
 

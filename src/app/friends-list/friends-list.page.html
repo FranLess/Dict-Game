@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="requestsLoaded">
+  <ion-list>
+    <ion-card
+      *ngFor="let request of friendRequests"
+      (click)="showUser(request.sender.id)"
+    >
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngIf="request.imSender">
+            <ion-col size="2">
+              <ion-avatar>
+                <ion-img
+                  class="avatar-image"
+                  [src]="request.receptor.profile.image_url"
+                ></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="7">
+              <ion-card-header>
+                <ion-card-title>{{ request.receptor.name }}</ion-card-title>
+              </ion-card-header>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="!request.imSender">
+            <ion-col size="2">
+              <ion-avatar>
+                <ion-img
+                  class="avatar-image"
+                  [src]="request.receptor.profile.image_url"
+                ></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="7">
+              <ion-card-header>
+                <ion-card-title>{{ request.sender.name }}</ion-card-title>
+              </ion-card-header>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -18,7 +18,7 @@ export class ImageApiService {
   }
 
   async store($image: any) {
-    const user = await this.userService.getUser();
+    const user = await this.userService.getCurrentUser();
     const uri = `${this.uri}/api/images`;
     const token = await this.apiHelper.getToken();
 

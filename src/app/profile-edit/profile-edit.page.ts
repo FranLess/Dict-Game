@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserApiService } from '../services/users/user-api.service';
 import { ApiHelperService } from '../services/helpers/api-helper.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AlertHelperService } from '../services/helpers/alert/alert-helper.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -27,7 +28,8 @@ export class ProfileEditPage implements OnInit {
   constructor(
     private userService: UserApiService,
     private apiHelper: ApiHelperService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private alertHelper: AlertHelperService
   ) {}
 
   ngOnInit() {
@@ -45,6 +47,7 @@ export class ProfileEditPage implements OnInit {
       );
     };
 
+    console.log(this.image);
     this.profile.image = this.image;
     reader.readAsDataURL(this.image);
   }
@@ -61,6 +64,7 @@ export class ProfileEditPage implements OnInit {
     };
 
     this.profile.image_header = this.imageHeader;
+    console.log(this.imageHeader);
     reader.readAsDataURL(this.imageHeader);
   }
 
@@ -69,12 +73,25 @@ export class ProfileEditPage implements OnInit {
     this.countries = await this.apiHelper.getCountryList();
     this.levels = await this.apiHelper.getLevelList();
     this.sentimentals = await this.apiHelper.getSentimentalList();
+
+    this.profile.country_id = 1;
+    this.profile.level_id = 1;
+    this.profile.sentimental_id = 1;
     console.log(this.profile);
     this.profileLoaded = true;
   }
 
   async save() {
-    await this.userService.saveProfile(this.profile);
+    this.userService
+      .saveProfile(this.profile)
+      .then((res) => {
+        this.alertHelper.presentAlert(
+          'Guardado',
+          '',
+          'perfil guardado exitosamente'
+        );
+      })
+      .catch((error) => console.log(error));
     await this.getProfileData();
   }
 }

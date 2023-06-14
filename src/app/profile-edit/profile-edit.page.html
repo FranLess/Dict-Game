@@ -1,14 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile-edit</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Edita tu perfil</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content *ngIf="!profileLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
 <ion-content [fullscreen]="true" *ngIf="profileLoaded">
   <!-- IMAGEN DE PERFIL -->
+  <ion-item>
+    <ion-label>Imagen de perfil</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Imagen de perfil</ion-label>
       <ion-input
         type="file"
         placeholder="select an image.."
@@ -19,9 +26,11 @@
   </ion-card>
 
   <!-- IMAGEN DE BANNER -->
+  <ion-item>
+    <ion-label>Imagen de banner</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Imagen de banner</ion-label>
       <ion-input
         type="file"
         placeholder="select an image.."
@@ -32,9 +41,11 @@
   </ion-card>
 
   <!-- FECHA DE NACIMIENTO -->
+  <ion-item>
+    <ion-label>Fecha de nacimiento</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item (click)="dateShow = !dateShow" class="ion-text-center">
-      <ion-label>Fecha de nacimiento</ion-label>
       <ion-label>{{profile.day_of_birth}}</ion-label>
       <ion-icon slot="end" name="chevron-down"></ion-icon>
     </ion-item>
@@ -47,9 +58,11 @@
   </ion-card>
 
   <!-- GENERO -->
+  <ion-item>
+    <ion-label>Género</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Género</ion-label>
       <ion-label>{{profile.gender}}</ion-label>
       <ion-item>
         <ion-radio-group [(ngModel)]="profile.gender">
@@ -62,11 +75,13 @@
   </ion-card>
 
   <!-- PAIS -->
+  <ion-item>
+    <ion-label>País</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
       <ion-select
         justify="start"
-        label="País"
         placeholder="país"
         [(ngModel)]="profile.country_id"
       >
@@ -80,6 +95,9 @@
   </ion-card>
 
   <!-- BIO -->
+  <ion-item>
+    <ion-label>Bio</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
       <ion-label>Bio</ion-label>
@@ -90,9 +108,11 @@
   </ion-card>
 
   <!-- NUMERO DE TELEFONO -->
+  <ion-item>
+    <ion-label>Número de teléfono</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Numero de telefono</ion-label>
       <ion-input
         type="text"
         placeholder="Tu número de telefono"
@@ -102,9 +122,11 @@
   </ion-card>
 
   <!-- PUBLIC EMAIL -->
+  <ion-item>
+    <ion-label>Email público</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Tu email publico</ion-label>
       <ion-input
         type="email"
         placeholder="Tu email público"
@@ -114,9 +136,11 @@
   </ion-card>
 
   <!-- LEVEL -->
+  <ion-item>
+    <ion-label>Tipo de cuenta</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Nivel de la cuenta</ion-label>
       <ion-select
         justify="start"
         label="Tipo de cuenta"
@@ -132,9 +156,11 @@
   </ion-card>
 
   <!-- SENTIMENTAL STATUS -->
+  <ion-item>
+    <ion-label>Estado</ion-label>
+  </ion-item>
   <ion-card>
     <ion-item>
-      <ion-label>Estado</ion-label>
       <ion-select
         justify="start"
         label="Estado"

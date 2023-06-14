@@ -30,7 +30,7 @@ export class FolderPage implements OnInit {
     userRegisterRequest.subscribe((response) => console.log(response));
   }
 
-  getUser() {
+  getCurrentUser() {
     const userRequest = this.http.get('http://localhost:8000/api/user');
     userRequest.subscribe(
       (response) => console.log(response),

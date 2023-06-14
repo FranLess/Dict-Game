@@ -9,22 +9,30 @@
 
 <ion-content [fullscreen]="true">
   <div class="container" *ngIf="postsLoaded">
-    <ion-item *ngFor="let item of posts">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle *ngIf="item.user"
-            >{{item.user.username}}</ion-card-subtitle
-          >
-          <ion-card-title>{{item.title}}</ion-card-title>
-        </ion-card-header>
-        <ion-img
-          *ngIf="item.image"
-          src="{{item.image[0].source}}"
-          alt="The Wisconsin State Capitol building in Madison, WI at night"
-        ></ion-img>
-        <ion-card-content> {{item.content}} </ion-card-content>
-      </ion-card>
-    </ion-item>
+    <ion-card *ngFor="let post of posts" (click)="showPost(post.id)">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar>
+            <ion-img
+              class="avatar-image"
+              [src]="post.user.profile.image_url"
+            ></ion-img>
+          </ion-avatar>
+          <ion-item>
+            <ion-card-subtitle *ngIf="post.user"
+              >{{post.user.username}}</ion-card-subtitle
+            >
+          </ion-item>
+        </ion-item>
+        <ion-card-title>{{post.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-img
+        *ngIf="post"
+        [src]="post.image_source"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+      ></ion-img>
+      <ion-card-content> {{post.content}} </ion-card-content>
+    </ion-card>
 
     <ion-grid class="ion-text-center">
       <ion-row class="ion-align-items-center">

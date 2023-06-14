@@ -4,6 +4,8 @@ import { ApiHelperService } from '../services/helpers/api-helper.service';
 import { UserApiService } from '../services/users/user-api.service';
 import { PostApiService } from '../services/posts/post-api.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { RouterService } from '../services/router/router.service';
+import { AlertHelperService } from '../services/helpers/alert/alert-helper.service';
 
 @Component({
   selector: 'app-post-create',
@@ -23,7 +25,9 @@ export class PostCreatePage implements OnInit {
     private apiHelper: ApiHelperService,
     private userService: UserApiService,
     private postService: PostApiService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private routerService: RouterService,
+    private alertHelper: AlertHelperService
   ) {}
 
   ngOnInit() {}
@@ -43,6 +47,11 @@ export class PostCreatePage implements OnInit {
   }
 
   async create() {
-    this.postService.createPost(this.title, this.content, this.image);
+    this.postService
+      .createPost(this.title, this.content, this.image)
+      .then((res) => this.routerService.goHome())
+      .catch((err) =>
+        this.alertHelper.presentAlert('Error', '', err.error.message)
+      );
   }
 }
