@@ -8,11 +8,6 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'folder/:id',
-    loadChildren: () =>
-      import('./folder/folder.module').then((m) => m.FolderPageModule),
-  },
-  {
     path: 'post-create',
     loadChildren: () =>
       import('./post-create/post-create.module').then(
@@ -40,12 +35,7 @@ const routes: Routes = [
       import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'chat',
-    loadChildren: () =>
-      import('./chat/chat.module').then((m) => m.ChatPageModule),
-  },
-  {
-    path: 'conversation',
+    path: 'conversation/:id',
     loadChildren: () =>
       import('./conversation/conversation.module').then(
         (m) => m.ConversationPageModule
@@ -90,11 +80,33 @@ const routes: Routes = [
   },
   {
     path: 'friends-list',
-    loadChildren: () => import('./friends-list/friends-list.module').then( m => m.FriendsListPageModule)
+    loadChildren: () =>
+      import('./friends-list/friends-list.module').then(
+        (m) => m.FriendsListPageModule
+      ),
   },
   {
     path: 'friends-requests',
-    loadChildren: () => import('./friends-requests/friends-requests.module').then( m => m.FriendsRequestsPageModule)
+    loadChildren: () =>
+      import('./friends-requests/friends-requests.module').then(
+        (m) => m.FriendsRequestsPageModule
+      ),
+  },
+  {
+    path: 'conversations',
+    loadChildren: () =>
+      import('./conversations/conversations.module').then(
+        (m) => m.ConversationsPageModule
+      ),
+  },
+  {
+    path: 'post-edit/:id',
+    loadChildren: () =>
+      import('./post-edit/post-edit.module').then((m) => m.PostEditPageModule),
+  },
+  {
+    path: 'load',
+    loadChildren: () => import('./load/load.module').then( m => m.LoadPageModule)
   },
 ];
 

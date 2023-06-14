@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ChatPageRoutingModule } from './chat-routing.module';
+import { PostEditPageRoutingModule } from './post-edit-routing.module';
 
-import { ChatPage } from './chat.page';
+import { PostEditPage } from './post-edit.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ChatPageRoutingModule
+    PostEditPageRoutingModule
   ],
-  declarations: [ChatPage]
+  declarations: [PostEditPage]
 })
-export class ChatPageModule {}
+export class PostEditPageModule {}

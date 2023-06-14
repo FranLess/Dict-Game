@@ -7,6 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content *ngIf="!requestsLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+
 <ion-content *ngIf="requestsLoaded">
   <ion-list>
     <ion-card *ngFor="let request of friendRequests">

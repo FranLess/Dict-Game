@@ -69,7 +69,7 @@ export class ProfileEditPage implements OnInit {
   }
 
   async getProfileData() {
-    this.profile = await this.userService.getProfile();
+    this.profile = await this.userService.getCurrentProfile();
     this.countries = await this.apiHelper.getCountryList();
     this.levels = await this.apiHelper.getLevelList();
     this.sentimentals = await this.apiHelper.getSentimentalList();

@@ -2,18 +2,28 @@ import { Injectable } from '@angular/core';
 import { UserApiService } from '../users/user-api.service';
 import { ApiHelperService } from '../helpers/api-helper.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { AlertHelperService } from '../helpers/alert/alert-helper.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendApiService {
   public uri: string;
+  public requests: any;
+  public currentUser: any;
   constructor(
     private userService: UserApiService,
     private apiHelper: ApiHelperService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertHelper: AlertHelperService
   ) {
     this.uri = this.apiHelper.uri;
+    this.init();
+  }
+
+  async init() {
+    this.requests = await this.getFriendRequests();
+    this.currentUser = await this.userService.getCurrentUser();
   }
 
   async getFriendRequests() {
@@ -47,7 +57,15 @@ export class FriendApiService {
         (response: any) => resolve(response),
         (error) => reject(error)
       );
-    });
+    })
+      .then((res) => this.alertHelper.presentAlert('Solicitud enviada', '', ''))
+      .catch((error) =>
+        this.alertHelper.presentAlert(
+          'Solicitud enviada',
+          '',
+          'Ya has enviado una solicitud a este usuario'
+        )
+      );
   }
 
   async acceptRequest(request: any) {
@@ -95,5 +113,28 @@ export class FriendApiService {
         (error) => reject(error)
       );
     });
+  }
+
+  async isFriend(id: number) {
+    const requests = await this.getFriendRequests();
+    const currentUser = await this.userService.getCurrentUser();
+    return requests.some(
+      (request: any) =>
+        ((request.sender_id === id && request.receptor_id === currentUser.id) ||
+          (request.sender_id === currentUser.id &&
+            request.receptor_id === id)) &&
+        request.is_accepted === 1
+    );
+  }
+  async getIsFriendRequest(id: number) {
+    const requests = await this.getFriendRequests();
+    const currentUser = await this.userService.getCurrentUser();
+    return requests.find(
+      (request: any) =>
+        ((request.sender_id === id && request.receptor_id === currentUser.id) ||
+          (request.sender_id === currentUser.id &&
+            request.receptor_id === id)) &&
+        request.is_accepted === 1
+    );
   }
 }

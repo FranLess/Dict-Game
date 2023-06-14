@@ -45,6 +45,7 @@
       Añadir amigo
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
+
     <ion-button
       danger
       (click)="deleteFriend()"
@@ -54,6 +55,17 @@
     >
       Eliminar amigo
       <ion-icon slot="end" name="close-circle"></ion-icon>
+    </ion-button>
+
+    <ion-button
+      danger
+      (click)="startConversation()"
+      expand="block"
+      fill="solid"
+      *ngIf="isFriend"
+    >
+      Enviar mensaje
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
     </ion-button>
   </div>
 

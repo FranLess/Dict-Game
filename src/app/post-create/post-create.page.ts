@@ -49,7 +49,7 @@ export class PostCreatePage implements OnInit {
   async create() {
     this.postService
       .createPost(this.title, this.content, this.image)
-      .then((res) => this.routerService.goHome())
+      .then((res) => this.routerService.goProfile())
       .catch((err) =>
         this.alertHelper.presentAlert('Error', '', err.error.message)
       );

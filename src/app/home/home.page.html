@@ -7,8 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="container" *ngIf="postsLoaded">
+<ion-content *ngIf="!postsLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="postsLoaded">
+  <div class="container">
     <ion-card *ngFor="let post of posts" (click)="showPost(post.id)">
       <ion-card-header>
         <ion-item>

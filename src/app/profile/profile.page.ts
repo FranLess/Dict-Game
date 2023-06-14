@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserApiService } from '../services/users/user-api.service';
 import { PostApiService } from '../services/posts/post-api.service';
 import { ApiHelperService } from '../services/helpers/api-helper.service';
+import { AlertHelperService } from '../services/helpers/alert/alert-helper.service';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private apiHelper: ApiHelperService,
     private userService: UserApiService,
-    private postService: PostApiService
+    private postService: PostApiService,
+    private alertHelper: AlertHelperService
   ) {
     this.uri = this.apiHelper.uri;
   }
@@ -46,6 +48,15 @@ export class ProfilePage implements OnInit {
 
   showPost(id: any) {
     this.postService.showPost(id);
+  }
+
+  editPost(id: number) {
+    this.postService.editPost(id);
+  }
+
+  async deletePost(id: number) {
+    const confirm = await this.alertHelper.presentAlertChoose();
+    if (confirm) this.postService.deletePost(id);
   }
 
   async getCurrentUser() {

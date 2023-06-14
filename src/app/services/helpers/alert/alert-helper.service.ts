@@ -21,7 +21,11 @@ export class AlertHelperService {
     private toastController: ToastController
   ) {}
 
-  async presentAlert(header: string, subHeader: string, message: string) {
+  async presentAlert(
+    header: string = '',
+    subHeader: string = '',
+    message: string = ''
+  ) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subHeader,
@@ -44,5 +48,34 @@ export class AlertHelperService {
     });
 
     await toast.present();
+  }
+
+  async presentAlertChoose(): Promise<boolean> {
+    return new Promise<boolean>(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Confirmación',
+        message: '¿Estás seguro?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('El usuario ha cancelado.');
+              resolve(false);
+            },
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              console.log('El usuario ha aceptado.');
+              resolve(true);
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    });
   }
 }

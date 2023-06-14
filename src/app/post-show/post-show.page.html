@@ -6,7 +6,9 @@
     <ion-title>DICT GAME</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<ion-content *ngIf="!postLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
 <ion-content *ngIf="postLoaded">
   <ion-card>
     <ion-item (click)="showUser(post.user.id)">

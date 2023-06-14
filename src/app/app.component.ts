@@ -9,7 +9,7 @@ export class AppComponent {
     { title: 'home', url: '/home', icon: 'home' },
     { title: 'login', url: '/login', icon: 'person' },
     { title: 'Create Post', url: '/post-create', icon: 'pencil' },
-    { title: 'Conversations', url: '/conversation', icon: 'chatbubbles' },
+    { title: 'Conversations', url: '/conversations', icon: 'chatbubbles' },
     { title: 'Amigos', url: '/friends-list', icon: 'people' },
     {
       title: 'Solicitudes de amistad',

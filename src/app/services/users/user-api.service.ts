@@ -3,6 +3,7 @@ import { ApiHelperService } from '../helpers/api-helper.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RouterService } from '../router/router.service';
+import { FriendApiService } from '../friends/friend-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,10 @@ export class UserApiService {
     private router: Router
   ) {
     this.uri = this.apiHelper.uri;
+    this.init();
   }
+
+  async init() {}
 
   // LOGIN DE USUARIO
   async login(email: string, password: string) {
@@ -166,7 +170,7 @@ export class UserApiService {
   }
 
   // OBTENER EL PERFIL DEL USUARIO
-  async getProfile() {
+  async getCurrentProfile() {
     const user: any = await this.getCurrentUser();
     return user.profile;
   }
@@ -198,10 +202,5 @@ export class UserApiService {
         (error) => reject(error)
       );
     });
-  }
-
-  async getFriendRequests() {
-    const user = await this.getCurrentUser();
-    return user.friends;
   }
 }

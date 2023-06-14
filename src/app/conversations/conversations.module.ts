@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { ConversationsPageRoutingModule } from './conversations-routing.module';
 
-import { FolderPage } from './folder.page';
+import { ConversationsPage } from './conversations.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    ConversationsPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [ConversationsPage]
 })
-export class FolderPageModule {}
+export class ConversationsPageModule {}
