@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!userLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+<ion-content *ngIf="userLoaded">
+  <div class="cover-photo">
+    <!-- Foto de portada -->
+    <img [src]="profile.image_header_url" alt="Cover Photo" />
+  </div>
+
+  <div class="profile-info">
+    <!-- Foto de perfil -->
+    <img [src]="profile.image_url" alt="Profile Photo" />
+
+    <!-- Nombre y descripción del usuario -->
+
+    <h1>{{ user.name }}</h1>
+    <p>{{ profile.bio }}</p>
+
+    <!-- Información adicional -->
+    <div class="additional-info" *ngIf="profile.country">
+      <ion-icon name="location-outline"></ion-icon>
+      <p>{{ profile.country.name }}</p>
+    </div>
+
+    <div class="additional-info">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <p>{{ profile.day_of_birth }}</p>
+    </div>
+    <ion-button
+      [routerLink]="['/profile-edit']"
+      routerLinkActive="router-link-active"
+      expand="block"
+      fill="clear"
+      shape="round"
+    >
+      <ion-icon slot="end" name="create-outline"></ion-icon>
+      Editar
+    </ion-button>
+
+    <!-- Toggle edition mode -->
+    <ion-item (click)="toggleEditMode()" class="{{classModeEdit}}">
+      <ion-label>Modo edición</ion-label>
+    </ion-item>
+  </div>
+
+  <!-- Publicaciones del usuario -->
+  <div class="container" *ngFor="let post of posts">
+    <ion-card (click)="showPost(post.id)">
+      <ion-card-header>
+        <!-- <ion-card-subtitle>{{  }}</ion-card-subtitle> -->
+        <ion-card-title>{{ post.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-img
+        *ngIf="post.image"
+        [src]="post.image_source"
+        alt="noimage"
+      ></ion-img>
+      <!-- <ion-card-content> {{ post.content }} </ion-card-content> -->
+    </ion-card>
+    <ion-item *ngIf="editMode">
+      <ion-item button color="primary" (click)="editPost(post.id)">
+        <ion-label>Editar</ion-label>
+      </ion-item>
+      <ion-item button color="danger" (click)="deletePost(post.id)">
+        <ion-label>Eliminar</ion-label>
+      </ion-item>
+    </ion-item>
+  </div>
+</ion-content>

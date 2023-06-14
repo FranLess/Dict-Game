@@ -1,5 +1,6 @@
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
+  z-index: 1000;
 }
 
 ion-menu.md ion-content {
@@ -116,4 +117,9 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+.full-load{
+  width: 100%;
+  height: 100%;
 }

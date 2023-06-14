@@ -1,0 +1,23 @@
+.chat-list {
+  padding: 10px;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+}
+
+.message.sent {
+  justify-content: flex-end;
+}
+
+.message .ion-label {
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message.sent .ion-label {
+  background-color: #d4edda;
+}

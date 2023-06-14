@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!postsLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+
+<ion-content [fullscreen]="true" *ngIf="postsLoaded">
+  <div class="container">
+    <ion-card *ngFor="let post of posts" (click)="showPost(post.id)">
+      <ion-card-header>
+        <ion-item>
+          <ion-avatar>
+            <ion-img
+              class="avatar-image"
+              [src]="post.user.profile.image_url"
+            ></ion-img>
+          </ion-avatar>
+          <ion-item>
+            <ion-card-subtitle *ngIf="post.user"
+              >{{post.user.username}}</ion-card-subtitle
+            >
+          </ion-item>
+        </ion-item>
+        <ion-card-title>{{post.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-img
+        *ngIf="post"
+        [src]="post.image_source"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+      ></ion-img>
+      <ion-card-content> {{post.content}} </ion-card-content>
+    </ion-card>
+
+    <ion-grid class="ion-text-center">
+      <ion-row class="ion-align-items-center">
+        <ion-col>
+          <div (click)="backPage()">
+            <ion-icon name="caret-back-outline"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>{{page}}</div>
+        </ion-col>
+        <ion-col>
+          <div (click)="nextPage()">
+            <ion-icon name="caret-forward-outline"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>DICT GAME</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!conversationLoaded">
+  <ion-spinner class="full-load" name="crescent"></ion-spinner>
+</ion-content>
+
+<ion-content *ngIf="conversationLoaded">
+  <div class="container" *ngFor="let message of messages">
+    <ion-list lines="none" class="chat-list" *ngIf="message.imSender">
+      <ion-item [class]="'message ' + message.type" class="ion-text-end">
+        <ion-label>{{ message.content }} <-Me </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none" class="chat-list" *ngIf="!message.imSender">
+      <ion-item [class]="'message ' + message.type" class="ion-text-start">
+        <ion-label>{{message.user.name}}->{{ message.content }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-input
+        placeholder="Escribe un mensaje..."
+        [(ngModel)]="newMessage"
+      ></ion-input>
+      <ion-button expand="block" (click)="sendMessage()" color="primary"
+        >Enviar</ion-button
+      >
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
