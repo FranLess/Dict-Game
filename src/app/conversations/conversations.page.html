@@ -19,7 +19,25 @@
     >
       <ion-card-content>
         <ion-grid>
-          <ion-row>
+          <ion-row *ngIf="conversation.imSender">
+            <ion-col size="2">
+              <ion-avatar>
+                <ion-img
+                  class="avatar-image"
+                  [src]="conversation.receptor.profile.image_url"
+                ></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="7">
+              <ion-card-header>
+                <ion-card-title
+                  >Me->{{ conversation.receptor.name }}</ion-card-title
+                >
+              </ion-card-header>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="!conversation.imSender">
             <ion-col size="2">
               <ion-avatar>
                 <ion-img
@@ -30,15 +48,11 @@
             </ion-col>
             <ion-col size="7">
               <ion-card-header>
-                <ion-card-title>{{ conversation.sender.name }}</ion-card-title>
+                <ion-card-title
+                  >{{ conversation.sender.name }}-> Me</ion-card-title
+                >
               </ion-card-header>
             </ion-col>
-            <!-- <ion-button
-              fill="clear"
-              color="danger"
-              (click)="deleteConversation(conversation.id)"
-              >Eliminar</ion-button
-            > -->
           </ion-row>
         </ion-grid>
       </ion-card-content>

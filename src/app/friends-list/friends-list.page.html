@@ -15,7 +15,7 @@
   <ion-list>
     <ion-card
       *ngFor="let request of friendRequests"
-      (click)="showUser(request.sender.id)"
+      (click)="showUser(request.showUserId)"
     >
       <ion-card-content>
         <ion-grid>
@@ -39,7 +39,7 @@
               <ion-avatar>
                 <ion-img
                   class="avatar-image"
-                  [src]="request.receptor.profile.image_url"
+                  [src]="request.sender.profile.image_url"
                 ></ion-img>
               </ion-avatar>
             </ion-col>

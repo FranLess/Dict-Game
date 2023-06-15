@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sobre Nosotros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-title>Descubre más sobre los colaboradores de Dict Game</ion-title>
+  <ion-card (click)="redirect('https://www.instagram.com/liammarquez._/')">
+    <ion-text color="primary">
+      <h1>Liam Márquez</h1>
+    </ion-text>
+  </ion-card>
+  <ion-card (click)="redirect('https://www.instagram.com/boly_wut/')">
+    <ion-text color="primary">
+      <h1>Emiliano Reynoza</h1>
+    </ion-text>
+  </ion-card>
+  <ion-card (click)="redirect('https://www.instagram.com/_tacitante_/')">
+    <ion-text color="primary">
+      <h1>Francisco Martínez</h1>
+    </ion-text>
+  </ion-card>
+  <ion-img src="assets/logo.png"></ion-img>
+</ion-content>
