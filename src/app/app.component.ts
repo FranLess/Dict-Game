@@ -18,6 +18,7 @@ export class AppComponent {
     { title: 'Perfil', url: '/profile', icon: 'person-circle' },
     { title: 'Usuarios', url: '/users', icon: 'person' },
     { title: 'Logout', url: '/login', icon: 'log-out' },
+    { title: 'Sobre Dict Game', url: '/about', icon: 'game-controller' },
   ];
   constructor() {}
 }

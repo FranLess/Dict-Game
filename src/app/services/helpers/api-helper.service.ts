@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 
 const STORAGE_KEY_TOKEN = 'token';
 const STORAGE_KEY_USER = 'user';
-// const DEV_URI = 'http://192.168.1.7/dictGameAPI/public';
-const DEV_URI = 'http://localhost:8000';
+const DEV_URI = 'http://192.168.1.7/dictGameAPI/public';
+// const DEV_URI = 'http://localhost:8000';
 const PROD_URI = 'http://dictgame.000webhostapp.com';
 const DEV_STATUS = true;
 @Injectable({
