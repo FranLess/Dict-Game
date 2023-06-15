@@ -31,7 +31,7 @@ export class ConversationApiService {
 
     const uniqueIds = new Set();
 
-    const conversations = [
+    let conversations = [
       ...currentUser.sender_conversations,
       ...currentUser.receptor_conversations,
     ].filter((obj) => {
@@ -40,6 +40,13 @@ export class ConversationApiService {
         return true;
       }
       return false;
+    });
+
+    conversations = conversations.map((item: any) => {
+      return {
+        ...item,
+        imSender: item.sender_id === currentUser.id,
+      };
     });
 
     return conversations;

@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public appPages = [
     { title: 'home', url: '/home', icon: 'home' },
-    { title: 'login', url: '/login', icon: 'person' },
     { title: 'Create Post', url: '/post-create', icon: 'pencil' },
     { title: 'Conversations', url: '/conversations', icon: 'chatbubbles' },
     { title: 'Amigos', url: '/friends-list', icon: 'people' },
@@ -18,7 +17,7 @@ export class AppComponent {
     },
     { title: 'Perfil', url: '/profile', icon: 'person-circle' },
     { title: 'Usuarios', url: '/users', icon: 'person' },
-    { title: 'Logout', url: '/logout', icon: 'log-out' },
+    { title: 'Logout', url: '/login', icon: 'log-out' },
   ];
   constructor() {}
 }

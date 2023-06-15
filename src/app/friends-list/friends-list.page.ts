@@ -29,6 +29,8 @@ export class FriendsListPage implements OnInit {
       return {
         ...item,
         imSender: item.sender_id === user.id,
+        showUserId:
+          item.sender_id === user.id ? item.receptor_id : item.sender_id,
       };
     });
 
